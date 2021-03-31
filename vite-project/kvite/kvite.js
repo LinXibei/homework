@@ -39,6 +39,7 @@ app.use(async ctx => {
     // compilerSfc解析SFC，获得一个ast
     const ret = compilerSfc.parse(fs.readFileSync(p, 'utf8'))
     // 没有query.type处理sfc
+    console.log(3333, ret);
     if (!query.type) {
       // 获取脚本内容
       const scriptContent = ret.descriptor.script.content
