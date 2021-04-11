@@ -53,38 +53,25 @@ const imgObj = {
   "atlasPath": ""
 }
 
-const audioPath = './audios'
+const assetsPath = './assets'
 
 // 遍历audios文件获取对应的音频文件
-const audiosList = fs.readdirSync(audioPath).map(fileName => {
-  // console.log()
-  fs.stat(path.join(audioPath, fileName), (err, stats) => {
-    console.log(1, stats.isFile())
+// const assetsList = getAudioPath(assetsPath)
+function getAudioPath(audioPath) {
+  fs.readdirSync(audioPath).forEach(fileName => {
+    fs.stat(path.resolve(audioPath, fileName), (err, stats) => {
+      // console.log(3, fileName)
+      if (stats.isFile()) {
+        console.log(333, audioPath, fileName)
+        writeTxt(path.resolve(audioPath, fileName))
+      } else {
+        getAudioPath(path.join(audioPath, fileName))
+      }
+    })
   })
-  return path.join('./audios', fileName)
-})
-const children = fs.readdirSync(audiosList[0]).map(fileName => {
-  console.log(333333, fileName)
-  return path.join(audiosList[0], fileName)
-})
-console.log(444, audiosList)
+}
 
-fs.readdirSync(folderPath).map(fileName => {
-  console.log(1111, fileName)
-  return path.join(folderPath, fileName)
-})
-
-// fs.readFile('./assets/animations/birdPacket_anim/红包_ske.json', 'utf8', (err, data) => {
-//   console.log(222, data)
-// })
-// fs.stat(`./audios/sound`, (err, stats) => {
-//   // if (stats.isFile()) {
-//   //   console.log(1)
-//   // } else if (stats.isDirectory()) {
-//   //   console.log(2)
-//   // }
-//   if (err) {
-//     console.log(err)
-//     return
-//   }
-// })
+function writeTxt(filePath, fileName) {
+  
+}
+getAudioPath(assetsPath)
